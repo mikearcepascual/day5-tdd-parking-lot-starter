@@ -9,6 +9,9 @@ public class ParkingLot {
 
     public ParkingTicket park(Car car) {
         ParkingTicket parkingTicket = new ParkingTicket();
+        if(cars.size()>=10){
+            return null;
+        }
         cars.put(parkingTicket, car);
         return parkingTicket;
     }

@@ -3,6 +3,10 @@ package com.parkinglot;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -72,5 +76,19 @@ public class ParkingLotTest {
 
      //then
         assertNull(fetchCarAgain);
+    }
+    @Test
+    void should_return_null_when_park_given_no_parking_slot_and_a_car() {
+    //given
+
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car();
+        for(int index = 0;index <10;index++){
+            parkingLot.park(car);
+        }
+        //when
+        ParkingTicket parkingTicket = parkingLot.park(car);
+     //then
+        assertNull(parkingTicket);
     }
 }
