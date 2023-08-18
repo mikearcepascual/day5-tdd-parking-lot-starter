@@ -26,6 +26,9 @@ public class ParkingLot {
     }
 
     public Car fetch(ParkingTicket ticket) {
+        if(ticketCarMap.get(ticket) == null){
+            throw new UnrecognizedTicketException();
+        }
         return ticketCarMap.remove(ticket);
     }
 }
