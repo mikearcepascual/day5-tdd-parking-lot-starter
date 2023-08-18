@@ -19,7 +19,7 @@ public class ParkingLot {
     public ParkingTicket park(Car car) {
         ParkingTicket parkingTicket = new ParkingTicket();
         if(ticketCarMap.size()>= parkingLotSize){
-            return null;
+            throw new ParkingSizeOverflowException();
         }
         ticketCarMap.put(parkingTicket, car);
         return parkingTicket;

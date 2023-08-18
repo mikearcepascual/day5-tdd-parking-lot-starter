@@ -70,10 +70,12 @@ public class ParkingLotTest {
         ParkingTicket parkingTicket = parkingLot.park(car);
         Car fetchCar = parkingLot.fetch(parkingTicket);
         //when
-        Car fetchCarAgain = parkingLot.fetch(parkingTicket);
 
-     //then
-        assertNull(fetchCarAgain);
+        //then
+        UnrecognizedTicketException unrecognizedTicketException = assertThrows(UnrecognizedTicketException.class, () -> {
+            parkingLot.fetch(parkingTicket);
+        });
+        assertEquals("Unrecognized parking ticket.",unrecognizedTicketException.getMessage());
     }
     @Test
     void should_return_null_when_park_given_no_parking_slot_and_a_car() {
@@ -85,8 +87,11 @@ public class ParkingLotTest {
             parkingLot.park(car);
         }
         //when
-        ParkingTicket parkingTicket = parkingLot.park(car);
-     //then
-        assertNull(parkingTicket);
+        ParkingSizeOverflowException parkingSizeOverflowException = assertThrows(ParkingSizeOverflowException.class, () -> {
+            parkingLot.park(car);
+        });
+
+        //then
+        assertEquals("No available position.",parkingSizeOverflowException.getMessage());
     }
 }
