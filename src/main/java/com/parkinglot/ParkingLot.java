@@ -13,7 +13,10 @@ public class ParkingLot {
         return parkingTicket;
     }
 
-    public Car fetch(ParkingTicket ticket) {
+    public Car fetch(Car car, ParkingTicket ticket) {
+        if(!cars.get(ticket).equals(car)){
+            return null;
+        }
         return cars.get(ticket);
     }
 }

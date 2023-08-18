@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class ParkingLotTest {
     @Test
@@ -24,7 +25,7 @@ public class ParkingLotTest {
         Car car = new Car();
         ParkingTicket ticket = parkingLot.park(car);
         //when
-        Car result = parkingLot.fetch(ticket);
+        Car result = parkingLot.fetch(car, ticket);
      //then
         Assertions.assertEquals(result,car);
     }
@@ -38,10 +39,24 @@ public class ParkingLotTest {
         ParkingTicket smallCarTicket = parkingLot.park(smallCar);
         ParkingTicket bigCarTicket = parkingLot.park(bigCar);
         //when
-        Car fetchSmallCar = parkingLot.fetch(smallCarTicket);
-        Car fetchBigCar = parkingLot.fetch(bigCarTicket);
+        Car fetchSmallCar = parkingLot.fetch(smallCar,smallCarTicket);
+        Car fetchBigCar = parkingLot.fetch(bigCar, bigCarTicket);
      //then
         Assertions.assertEquals(fetchSmallCar,smallCar);
         Assertions.assertEquals(fetchBigCar,bigCar);
+    }
+    
+    @Test
+    void should_return_null_when_fetch_given_parking_lot_and_wrong_ticket() {
+    //given
+     ParkingLot parkingLot = new ParkingLot();
+     Car smallCar = new Car();
+     Car bigCar = new Car();
+     ParkingTicket smallCarTicket = parkingLot.park(smallCar);
+     ParkingTicket bigCarTicket = parkingLot.park(bigCar);
+     //when
+        Car fetchSmallCar = parkingLot.fetch(smallCar, bigCarTicket);
+     //then
+        assertNull(fetchSmallCar);
     }
 }
