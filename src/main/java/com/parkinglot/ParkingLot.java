@@ -14,9 +14,9 @@ public class ParkingLot {
     }
 
     public Car fetch(Car car, ParkingTicket ticket) {
-        if(!cars.get(ticket).equals(car)){
+        if(!cars.get(ticket).equals(car) || cars.containsKey(ticket)){
             return null;
         }
-        return cars.get(ticket);
+        return cars.remove(ticket);
     }
 }
