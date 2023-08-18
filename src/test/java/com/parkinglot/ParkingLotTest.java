@@ -3,9 +3,6 @@ package com.parkinglot;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -29,7 +26,7 @@ public class ParkingLotTest {
         Car car = new Car();
         ParkingTicket ticket = parkingLot.park(car);
         //when
-        Car result = parkingLot.fetch(car, ticket);
+        Car result = parkingLot.fetch(ticket);
      //then
         Assertions.assertEquals(result,car);
     }
@@ -43,8 +40,8 @@ public class ParkingLotTest {
         ParkingTicket smallCarTicket = parkingLot.park(smallCar);
         ParkingTicket bigCarTicket = parkingLot.park(bigCar);
         //when
-        Car fetchSmallCar = parkingLot.fetch(smallCar,smallCarTicket);
-        Car fetchBigCar = parkingLot.fetch(bigCar, bigCarTicket);
+        Car fetchSmallCar = parkingLot.fetch(smallCarTicket);
+        Car fetchBigCar = parkingLot.fetch(bigCarTicket);
      //then
         Assertions.assertEquals(fetchSmallCar,smallCar);
         Assertions.assertEquals(fetchBigCar,bigCar);
@@ -55,11 +52,10 @@ public class ParkingLotTest {
     //given
      ParkingLot parkingLot = new ParkingLot();
      Car smallCar = new Car();
-     Car bigCar = new Car();
-     ParkingTicket smallCarTicket = parkingLot.park(smallCar);
-     ParkingTicket bigCarTicket = parkingLot.park(bigCar);
+     parkingLot.park(smallCar);
+     ParkingTicket bigCarTicket = new ParkingTicket();
      //when
-        Car fetchSmallCar = parkingLot.fetch(smallCar, bigCarTicket);
+        Car fetchSmallCar = parkingLot.fetch(bigCarTicket);
      //then
         assertNull(fetchSmallCar);
     }
@@ -70,9 +66,9 @@ public class ParkingLotTest {
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
         ParkingTicket parkingTicket = parkingLot.park(car);
-        Car fetchCar = parkingLot.fetch(car,parkingTicket);
+        Car fetchCar = parkingLot.fetch(parkingTicket);
         //when
-        Car fetchCarAgain = parkingLot.fetch(car,parkingTicket);
+        Car fetchCarAgain = parkingLot.fetch(parkingTicket);
 
      //then
         assertNull(fetchCarAgain);
