@@ -42,7 +42,7 @@ public class StandardParkingBoyTest {
     }
 
     @Test
-    void should_return_cars_with_right_tickets_when_fetch_twice_given_parking_lot_and_two_parked_cars() {
+    void should_return_cars_with_right_tickets_when_fetch_twice_given_standard_parking_boy_two_parking_lots_and_two_parked_cars() {
         //given
         ParkingLot firstParkingLot = new ParkingLot(1);
         ParkingLot secondParkingLot = new ParkingLot(2);
@@ -61,7 +61,7 @@ public class StandardParkingBoyTest {
     }
 
     @Test
-    void should_return_UnrecognizedTicketException_when_fetch_given_two_parking_lots_and_a_wrong_ticket(){
+    void should_return_UnrecognizedTicketException_when_fetch_given_standard_parking_boy_two_parking_lots_and_a_wrong_ticket(){
         //given
         ParkingLot firstParkingLot = new ParkingLot(1);
         ParkingLot secondParkingLot = new ParkingLot(2);
@@ -80,7 +80,7 @@ public class StandardParkingBoyTest {
     }
 
     @Test
-    void should_return_UnrecognizedTicketException_when_fetch_given_two_parking_lots_and_a_used_ticket(){
+    void should_return_UnrecognizedTicketException_when_fetch_given_standard_parking_boy_two_parking_lots_and_a_used_ticket(){
         //given
         ParkingLot firstParkingLot = new ParkingLot(1);
         ParkingLot secondParkingLot = new ParkingLot(2);
@@ -98,7 +98,7 @@ public class StandardParkingBoyTest {
     }
 
     @Test
-    void should_return_NoAvailablePositionException_when_park_given_two_full_parking_lots_and_a_car() {
+    void should_return_NoAvailablePositionException_when_park_given_standard_parking_boy_two_full_parking_lots_and_a_car() {
         //given
 
         ParkingLot firstParkingLot = new ParkingLot(1);
