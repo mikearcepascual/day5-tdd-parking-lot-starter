@@ -17,4 +17,12 @@ public class SuperParkingBoy {
                 .orElseThrow(NoAvailablePositionException::new)
                 .park(car);
     }
+
+    public Car fetch(ParkingTicket parkingTicket) {
+        return parkingLots.stream()
+                .filter(parkingLot -> parkingLot.ticketCarMap.get(parkingTicket) != null)
+                .findFirst()
+                .orElseThrow(UnrecognizedTicketException::new)
+                .fetch(parkingTicket);
+    }
 }
