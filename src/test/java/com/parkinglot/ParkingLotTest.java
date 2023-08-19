@@ -77,7 +77,7 @@ public class ParkingLotTest {
         assertEquals("Unrecognized parking ticket.",unrecognizedTicketException.getMessage());
     }
     @Test
-    void should_return_ParkingSizeOverflowException_when_park_given_no_parking_slot_and_a_car() {
+    void should_return_NoAvailablePositionException_when_park_given_no_parking_slot_and_a_car() {
     //given
 
         ParkingLot parkingLot = new ParkingLot();
@@ -86,11 +86,11 @@ public class ParkingLotTest {
             parkingLot.park(car);
         }
         //when
-        NoAvailablePositionException parkingSizeOverflowException = assertThrows(NoAvailablePositionException.class, () -> {
+        NoAvailablePositionException noAvailablePositionException = assertThrows(NoAvailablePositionException.class, () -> {
             parkingLot.park(car);
         });
 
         //then
-        assertEquals("No available position.",parkingSizeOverflowException.getMessage());
+        assertEquals("No available position.",noAvailablePositionException.getMessage());
     }
 }

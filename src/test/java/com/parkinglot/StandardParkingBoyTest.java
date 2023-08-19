@@ -74,13 +74,47 @@ public class StandardParkingBoyTest {
 
         //then
         UnrecognizedTicketException unrecognizedTicketException =
-                assertThrows(UnrecognizedTicketException.class, () -> {
-                    parkingLotList.stream()
-                            .filter(parkingLot -> parkingLot.ticketCarMap.get(parkingTicket) != null)
-                            .findFirst()
-                            .orElseThrow(UnrecognizedTicketException::new)
-                            .fetch(parkingTicket);
-                });
+                assertThrows(UnrecognizedTicketException.class, () ->
+                    standardParkingBoy.fetch(parkingTicket));
         assertEquals("Unrecognized parking ticket.", unrecognizedTicketException.getMessage());
+    }
+
+    @Test
+    void should_return_UnrecognizedTicketException_when_fetch_given_two_parking_lots_and_a_used_ticket(){
+        //given
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot(2);
+        List<ParkingLot> parkingLotList = List.of(firstParkingLot, secondParkingLot);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList);
+        Car carToBeParked = new Car();
+        ParkingTicket parkingTicket = standardParkingBoy.park(carToBeParked);
+        //when
+        standardParkingBoy.fetch(parkingTicket);
+        //then
+        UnrecognizedTicketException unrecognizedTicketException =
+                assertThrows(UnrecognizedTicketException.class, () ->
+                        standardParkingBoy.fetch(parkingTicket));
+        assertEquals("Unrecognized parking ticket.", unrecognizedTicketException.getMessage());
+    }
+
+    @Test
+    void should_return_NoAvailablePositionException_when_park_given_two_full_parking_lots_and_a_car() {
+        //given
+
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot(1);
+        List<ParkingLot> parkingLotList = List.of(firstParkingLot, secondParkingLot);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList);
+        Car car = new Car();
+        standardParkingBoy.park(car);
+        standardParkingBoy.park(car);
+
+        //when
+        NoAvailablePositionException noAvailablePositionException =
+                assertThrows(NoAvailablePositionException.class, () ->
+                    standardParkingBoy.park(car));
+
+        //then
+        assertEquals("No available position.",noAvailablePositionException.getMessage());
     }
 }

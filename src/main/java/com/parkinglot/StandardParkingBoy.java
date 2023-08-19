@@ -1,8 +1,6 @@
 package com.parkinglot;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class StandardParkingBoy {
     private final List<ParkingLot> parkingLots;
