@@ -16,10 +16,14 @@ public class ParkingLot {
         this.parkingLotSize = parkingLotSize;
     }
 
+    private boolean isFull() {
+        return ticketCarMap.size() >= parkingLotSize;
+    }
+
     public ParkingTicket park(Car car) {
         ParkingTicket parkingTicket = new ParkingTicket();
-        if(ticketCarMap.size()>= parkingLotSize){
-            throw new ParkingSizeOverflowException();
+        if(isFull()){
+            throw new NoAvailablePositionException();
         }
         ticketCarMap.put(parkingTicket, car);
         return parkingTicket;
@@ -30,5 +34,13 @@ public class ParkingLot {
             throw new UnrecognizedTicketException();
         }
         return ticketCarMap.remove(ticket);
+    }
+
+    public int getAvailableCapacity() {
+        return parkingLotSize - ticketCarMap.size();
+    }
+
+    public boolean hasAvailableCapacity() {
+        return !isFull();
     }
 }

@@ -46,7 +46,7 @@ public class ParkingLotTest {
     }
     
     @Test
-    void should_return_null_when_fetch_given_parking_lot_and_wrong_ticket() {
+    void should_return_UnrecognizedTicketException_when_fetch_given_parking_lot_and_wrong_ticket() {
     //given
      ParkingLot parkingLot = new ParkingLot();
      Car car = new Car();
@@ -63,12 +63,11 @@ public class ParkingLotTest {
     }
 
     @Test
-    void should_return_null_when_fetch_given_parking_lot_and_used_ticket() {
+    void should_return_UnrecognizedTicketException_when_fetch_given_parking_lot_and_used_ticket() {
     //given
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
         ParkingTicket parkingTicket = parkingLot.park(car);
-        Car fetchCar = parkingLot.fetch(parkingTicket);
         //when
 
         //then
@@ -78,7 +77,7 @@ public class ParkingLotTest {
         assertEquals("Unrecognized parking ticket.",unrecognizedTicketException.getMessage());
     }
     @Test
-    void should_return_null_when_park_given_no_parking_slot_and_a_car() {
+    void should_return_ParkingSizeOverflowException_when_park_given_no_parking_slot_and_a_car() {
     //given
 
         ParkingLot parkingLot = new ParkingLot();
@@ -87,7 +86,7 @@ public class ParkingLotTest {
             parkingLot.park(car);
         }
         //when
-        ParkingSizeOverflowException parkingSizeOverflowException = assertThrows(ParkingSizeOverflowException.class, () -> {
+        NoAvailablePositionException parkingSizeOverflowException = assertThrows(NoAvailablePositionException.class, () -> {
             parkingLot.park(car);
         });
 
