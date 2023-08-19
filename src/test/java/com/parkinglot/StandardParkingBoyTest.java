@@ -1,5 +1,6 @@
 package com.parkinglot;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -39,5 +40,24 @@ public class StandardParkingBoyTest {
         assertNotNull(parkingTicket);
         assertEquals(0,firstParkingLot.getAvailableCapacity());
         assertEquals(9,secondParkingLot.getAvailableCapacity());
+    }
+
+    @Test
+    void should_return_cars_with_right_tickets_when_fetch_twice_given_parking_lot_and_two_parked_cars() {
+        //given
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot(2);
+        List<ParkingLot> parkingLotList = List.of(firstParkingLot, secondParkingLot);
+        StandardParkingBoy standardParkingBoy = new StandardParkingBoy(parkingLotList);
+        Car firstCarToBeParked = new Car();
+        Car secondCarToBeParked = new Car();
+        ParkingTicket firstCarParkingTicket = standardParkingBoy.park(firstCarToBeParked);
+        ParkingTicket secondCarParkingTicket = standardParkingBoy.park(secondCarToBeParked);
+        //when
+        Car fetchFirstCar = standardParkingBoy.fetch(firstCarParkingTicket);
+        Car fetchSecondCar = standardParkingBoy.fetch(secondCarParkingTicket);
+        //then
+        Assertions.assertEquals(fetchFirstCar,firstCarToBeParked);
+        Assertions.assertEquals(fetchSecondCar,secondCarToBeParked);
     }
 }

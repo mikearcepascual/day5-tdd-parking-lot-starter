@@ -69,7 +69,7 @@ public class ParkingLotTest {
         Car car = new Car();
         ParkingTicket parkingTicket = parkingLot.park(car);
         //when
-
+        parkingLot.fetch(parkingTicket);
         //then
         UnrecognizedTicketException unrecognizedTicketException = assertThrows(UnrecognizedTicketException.class, () -> {
             parkingLot.fetch(parkingTicket);

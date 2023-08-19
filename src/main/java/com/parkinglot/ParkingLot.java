@@ -17,7 +17,7 @@ public class ParkingLot {
     }
 
     private boolean isFull() {
-        return ticketCarMap.size() >= parkingLotSize;
+        return ticketCarMap.size() == parkingLotSize;
     }
 
     public ParkingTicket park(Car car) {
